@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>notes slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>mainOutline slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7429,69 +7429,431 @@ main {
     init_mathjax();
     </script>
 <!-- End of mathjax configuration --><!-- Reveal Theme -->
-<link href="https://unpkg.com/reveal.js@4.0.2/dist/theme/simple.css" id="theme" rel="stylesheet"/>
+<link href="https://unpkg.com/reveal.js@4.0.2/dist/theme/beige.css" id="theme" rel="stylesheet"/>
 </head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
 <div class="reveal">
-<div class="slides"><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=01ddf207">
+<div class="slides"><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0f183bc2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#These are a bunch of notes and links</span>
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<!-- .slide: data-background-color="#0f172a" class="center" -->
+<h1 id="Prompt-Engineering">Prompt Engineering<a class="anchor-link" href="#Prompt-Engineering">¶</a></h1><h2 id="From-Prompts">From Prompts<a class="anchor-link" href="#From-Prompts">¶</a></h2><h2 id="to-Production-AI-Systems">to Production AI Systems<a class="anchor-link" href="#to-Production-AI-Systems">¶</a></h2><hr/>
+<p><strong>1 Hour Workshop</strong></p>
+<p>Design. Control. Optimize. Deploy.</p>
 </div>
 </div>
 </div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7e883fc8">
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e5db4653">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Claude</span>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="What-is-Prompt-Engineering?">What is Prompt Engineering?<a class="anchor-link" href="#What-is-Prompt-Engineering?">¶</a></h1><p>Prompt engineering is the process of designing inputs<br/>
+to guide large language models toward:</p>
+<ul>
+<li>Reliable outputs</li>
+<li>Structured responses</li>
+<li>Reduced hallucination</li>
+<li>Improved reasoning</li>
+</ul>
+<hr/>
+<p><strong>LLMs predict tokens — not truth.</strong></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3191b82b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Why-Prompt-Engineering-Matters">Why Prompt Engineering Matters<a class="anchor-link" href="#Why-Prompt-Engineering-Matters">¶</a></h1><p>Modern LLM systems like:</p>
+<ul>
+<li>ChatGPT</li>
+<li>Claude</li>
+<li>Gemini</li>
+</ul>
+<p>are probabilistic systems.</p>
+<hr/>
+<p>Same input<br/>
+≠<br/>
+Same output.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=04b1d5cd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="LLMs-Are-Not-Deterministic">LLMs Are Not Deterministic<a class="anchor-link" href="#LLMs-Are-Not-Deterministic">¶</a></h1><p>Large Language Models:</p>
+<ul>
+<li>Predict the next token using probability</li>
+<li>Sample from distributions</li>
+<li>Do not compute fixed answers</li>
+</ul>
+<hr/>
+<p>The same question<br/>
+can produce<br/>
+different outputs.</p>
+<hr/>
+<p>Let’s test this.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9d385e02">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Live-Test">Live Test<a class="anchor-link" href="#Live-Test">¶</a></h1><p>We will use the same prompt<br/>
+across multiple models.</p>
+<p>Observe:</p>
+<ul>
+<li>Differences in reasoning</li>
+<li>Differences in formatting</li>
+<li>Confidence level</li>
+</ul>
+<p>prompt = """A bat and a ball cost $1.10 total. The bat costs $1 more than the ball. How much does the ball cost?"""</p>
+<p>print("Run this prompt in multiple models:")
+print(prompt)</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=51a2c1c3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Temperature-&amp;-Randomness">Temperature &amp; Randomness<a class="anchor-link" href="#Temperature-&amp;-Randomness">¶</a></h1><p>Temperature controls<br/>
+how the model samples probabilities.</p>
+<hr/>
+<p>Higher temperature:</p>
+<ul>
+<li>More creative</li>
+<li>More diverse outputs</li>
+<li>Less predictable</li>
+</ul>
+<hr/>
+<p>Lower temperature:</p>
+<ul>
+<li>More deterministic</li>
+<li>More repeatable</li>
+<li>More stable</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b4c35ebf">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Reasoning-Models-vs-Traditional-LLMs">Reasoning Models vs Traditional LLMs<a class="anchor-link" href="#Reasoning-Models-vs-Traditional-LLMs">¶</a></h1><h2 id="Traditional-LLMs">Traditional LLMs<a class="anchor-link" href="#Traditional-LLMs">¶</a></h2><ul>
+<li>Fast</li>
+<li>Pattern-based completion</li>
+<li>May shortcut reasoning</li>
+</ul>
+<hr/>
+<h2 id="Reasoning-Optimized-Models">Reasoning-Optimized Models<a class="anchor-link" href="#Reasoning-Optimized-Models">¶</a></h2><ul>
+<li>Explicit step-by-step reasoning</li>
+<li>Greater logical depth</li>
+<li>Slower, but often more accurate</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=da88c690">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Reasoning-Test">Reasoning Test<a class="anchor-link" href="#Reasoning-Test">¶</a></h1><p>Solve step-by-step:</p>
+<p>"If 5 machines take 5 minutes to make 5 widgets,<br/>
+how long do 100 machines take to make 100 widgets?"</p>
+<hr/>
+<p>Now try:</p>
+<p>"Solve without explanation."</p>
+<hr/>
+<p>Observe:</p>
+<ul>
+<li>Does the answer change?</li>
+<li>Does confidence change?</li>
+<li>Does reasoning depth change?</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=63c0c9e5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Context-Windows">Context Windows<a class="anchor-link" href="#Context-Windows">¶</a></h1><p><strong>Context Window</strong> = How much text the model can remember at once.</p>
+<hr/>
+<p>Bigger context window:</p>
+<ul>
+<li>Handles longer documents</li>
+<li>Maintains more history</li>
+<li><strong>Does NOT mean smarter</strong></li>
+</ul>
+<hr/>
+<p>⚠️ Context overflow → loss of early information</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6d898e58">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Hallucination">Hallucination<a class="anchor-link" href="#Hallucination">¶</a></h1><p><strong>Hallucination</strong> = Confident fabrication of information</p>
+<hr/>
+<p>Why it happens:</p>
+<ul>
+<li>Model fills statistical gaps</li>
+<li>Optimized for coherence, not truth</li>
+<li>No internal fact-checking</li>
+</ul>
+<hr/>
+<p>The model prefers <strong>sounding right</strong><br/>
+over admitting uncertainty</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ca556599">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Prompt-Versioning">Prompt Versioning<a class="anchor-link" href="#Prompt-Versioning">¶</a></h1><p>Treat prompts like <strong>code</strong>.</p>
+<hr/>
+<p><strong>v1:</strong> "Summarize this article."<br/>
+<strong>v2:</strong> "Summarize this article in 5 bullet points."<br/>
+<strong>v3:</strong> "Summarize this article in 5 executive-level bullet points under 50 words."</p>
+<hr/>
+<p>Track changes.<br/>
+Measure improvements.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d1ffabfc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="A/B-Testing-Prompts">A/B Testing Prompts<a class="anchor-link" href="#A/B-Testing-Prompts">¶</a></h1><p>Same input.<br/>
+Different prompt versions.</p>
+<p>Compare output quality.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d1e0da49">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Prompt-Chaining">Prompt Chaining<a class="anchor-link" href="#Prompt-Chaining">¶</a></h1><p>Instead of one giant prompt:</p>
+<ol>
+<li>Extract entities</li>
+<li>Analyze sentiment</li>
+<li>Generate report</li>
+</ol>
+<p>Output of one prompt → Input of next</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=feb17093">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Zero-Shot-vs-Multi-Shot-Prompting">Zero-Shot vs Multi-Shot Prompting<a class="anchor-link" href="#Zero-Shot-vs-Multi-Shot-Prompting">¶</a></h1><p><strong>Zero-shot:</strong><br/>
+"Translate this to French."</p>
+<p><strong>Multi-shot:</strong><br/>
+Provide 2–3 examples first.</p>
+<hr/>
+<p>Few-shot prompting dramatically improves format consistency.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1b57abfe">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Multimodal-Prompting">Multimodal Prompting<a class="anchor-link" href="#Multimodal-Prompting">¶</a></h1><p>Modern models can process:</p>
+<ul>
+<li>Text</li>
+<li>Images</li>
+<li>Code</li>
+<li>Audio</li>
+</ul>
+<hr/>
+<p>GPT-4o is a <strong>multimodal model</strong> capable of understanding text, images, and code simultaneously.<br/>
+This enables structured extraction, document understanding, and advanced reasoning across data types.</p>
+<hr/>
+<p>References:</p>
+<ul>
+<li><a href="https://link.springer.com/chapter/10.1007/978-3-031-92611-2_4">Springer Chapter on GPT-4o Multimodal Capabilities</a></li>
+<li><a href="https://developers.openai.com/api/docs/models/gpt-4o">OpenAI GPT-4o Documentation</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0e58bb6b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="%F0%9F%9F%A6-CELL-21-%E2%80%94-Markdown-(Closing-Slide)">🟦 CELL 21 — Markdown (Closing Slide)<a class="anchor-link" href="#%F0%9F%9F%A6-CELL-21-%E2%80%94-Markdown-(Closing-Slide)">¶</a></h1><div class="highlight"><pre><span></span><span class="gh"># Key Takeaways</span>
 
-<span class="c1">#https://claude.ai/artifacts</span>
-<span class="c1">#https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=578b099a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># BAML</span>
+<span class="k">-</span><span class="w"> </span>LLMs are probabilistic systems
+<span class="k">-</span><span class="w"> </span>Prompt structure controls behavior
+<span class="k">-</span><span class="w"> </span>Versioning and testing improve reliability
+<span class="k">-</span><span class="w"> </span>Advanced techniques enable production-grade AI systems
 
-<span class="c1"># https://boundaryml.com/</span>
+Prompt engineering is system design.
+Not just better questions.
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8126a010">
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cf6d09e6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Adversarial-Prompting-/-Jailbreaking">Adversarial Prompting / Jailbreaking<a class="anchor-link" href="#Adversarial-Prompting-/-Jailbreaking">¶</a></h1><p>Techniques used to:</p>
+<ul>
+<li>Bypass safeguards</li>
+<li>Override system instructions</li>
+<li>Inject malicious instructions</li>
+</ul>
+<hr/>
+<p>Production systems must guard against:</p>
+<ul>
+<li>Prompt injection</li>
+<li>Role-play exploits</li>
+<li>Instruction override attacks</li>
+</ul>
 </div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f12b5c92">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Claude-in-Production-Systems">Claude in Production Systems<a class="anchor-link" href="#Claude-in-Production-Systems">¶</a></h1><p>Capabilities:</p>
+<ul>
+<li>Large context window</li>
+<li>Strong reasoning</li>
+<li>Tool use</li>
+</ul>
+<hr/>
+<p>Key Features:</p>
+<ul>
+<li><strong>Skills</strong>: Predefined abilities to perform structured tasks</li>
+<li><strong>Artifacts</strong>: Reusable outputs, templates, or tools for workflows</li>
+</ul>
+<hr/>
+<p>References:</p>
+<ul>
+<li><a href="https://claude.ai/artifacts">Claude Artifacts</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Claude Agents &amp; Tools / Skills Overview</a></li>
+</ul>
+<hr/>
+<p>Claude is often used for structured reasoning workflows and production AI pipelines.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de882cc7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Structured-Outputs-with-BAML">Structured Outputs with BAML<a class="anchor-link" href="#Structured-Outputs-with-BAML">¶</a></h1><p>BAML allows you to define <strong>schemas for AI outputs</strong></p>
+<p>Instead of parsing messy text,<br/>
+you enforce <strong>structured responses</strong>.</p>
+<hr/>
+<p>Example / More Info:</p>
+<ul>
+<li><a href="https://boundaryml.com/">BoundaryML — BAML</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b0159874">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>class TradeSignal:
+action: str
+confidence: float
+reasoning: str</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07393b80">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Key-Takeaways">Key Takeaways<a class="anchor-link" href="#Key-Takeaways">¶</a></h1><ul>
+<li>LLMs are probabilistic systems</li>
+<li>Prompt structure controls behavior</li>
+<li>Versioning and testing improve reliability</li>
+<li>Advanced techniques enable production-grade AI systems</li>
+</ul>
+<hr/>
+<p><strong>Prompt engineering is system design</strong><br/>
+Not just better questions</p>
 </div>
 </div>
 </div>
