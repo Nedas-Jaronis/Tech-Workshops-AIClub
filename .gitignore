@@ -1,1 +1,8 @@
 .env
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+*.pyc
+anaconda_projects/
+Workshop1/anaconda_projects/
