@@ -2,7 +2,7 @@
 # preview = fast 480p, check = 720p for proofing, hd = 1080p (use this for the workshop), 4k = 3840x2160
 param(
   [ValidateSet("preview", "check", "hd", "4k")][string]$Quality = "hd",
-  [string[]]$Slides = (1..18 | ForEach-Object { "S{0:D2}" -f $_ })
+  [string[]]$Slides = (1..20 | ForEach-Object { "S{0:D2}" -f $_ })
 )
 Set-Location $PSScriptRoot
 $flags = switch ($Quality) {

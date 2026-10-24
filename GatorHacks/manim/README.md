@@ -1,6 +1,6 @@
 # Agents 101 (Manim Slides)
 
-Animated deck, one scene per slide in `deck.py` (S01 to S18). Speaker notes are embedded.
+Animated deck, one scene per slide in `deck.py` (S01 to S20). Speaker notes are embedded.
 
 ## Run it
     .\render.ps1 -Quality hd      # 1080p, takes a few minutes (use -Quality preview for fast drafts)

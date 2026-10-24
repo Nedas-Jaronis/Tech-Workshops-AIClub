@@ -33,7 +33,7 @@ WARN_TXT = "#B45309"
 BAD = "#DC2626"
 GOOD_BG, WARN_BG, BAD_BG = "#E8F7EE", "#FFF6DB", "#FDECEC"
 MONO = "Consolas"
-TOTAL = 18
+TOTAL = 20
 LM = -6.4                 # left margin of all content
 AIRBNB = "Diagram adapted from a talk by Airbnb senior staff engineers"
 
@@ -73,6 +73,13 @@ def pill(label, stroke, fill, minw=1.6, h=0.7, size=24, color=BLUE, w="SEMIBOLD"
     b = box(max(minw, t.width + 0.7), h, stroke, fill, 2.2, r)
     t.move_to(b)
     return VGroup(b, t)
+
+
+def padlock(color, k=1.0):
+    body = RoundedRectangle(corner_radius=0.03, width=0.28 * k, height=0.21 * k, stroke_width=0, fill_color=color, fill_opacity=1)
+    arch = Arc(radius=0.085 * k, start_angle=0, angle=PI, stroke_width=3.2 * k, stroke_color=color)
+    arch.next_to(body, UP, buff=-0.01 * k)
+    return VGroup(arch, body)
 
 
 def dimmed(m, f):
@@ -229,19 +236,23 @@ class S01(Deck):
 
     def construct(self):
         self.prep()
-        self.add(facets(1.0).scale(1.0))
+        self.add(facets(1.0))
         logo = ImageMobject(str(HERE / "assets" / "logo.png")).scale_to_fit_height(2.7).move_to([4.5, 0.6, 0])
-        t = T("Agents 101", 104, BLUE, "BOLD").move_to([LM, 1.1, 0], aligned_edge=LEFT)
-        sub = T("How to actually work with", 38, INK, "MEDIUM").move_to([LM, -0.4, 0], aligned_edge=LEFT)
-        sub2 = T("AI coding agents", 38, INK, "MEDIUM").next_to(sub, DOWN, buff=0.12, aligned_edge=LEFT)
         bar = Rectangle(width=1.4, height=0.12, stroke_width=0, fill_color=ORANGE, fill_opacity=1)
-        bar.move_to([LM, 2.55, 0], aligned_edge=LEFT)
-        tag = T("Gator Hack V   ·   UF AI Days 2026", 26, ORANGE, "SEMIBOLD").move_to([LM, -2.3, 0], aligned_edge=LEFT)
-        self.play(GrowFromEdge(bar, LEFT), run_time=0.4)
+        bar.move_to([LM, 2.75, 0], aligned_edge=LEFT)
+        tag = T("Gator Hack V   ·   UF AI Days 2026", 24, ORANGE, "SEMIBOLD").move_to([LM, 2.2, 0], aligned_edge=LEFT)
+        t = T("Agents 101", 104, BLUE, "BOLD").move_to([LM, 0.8, 0], aligned_edge=LEFT)
+        sub = T("How to actually work with", 38, INK, "MEDIUM").move_to([LM, -0.65, 0], aligned_edge=LEFT)
+        sub2 = T("AI coding agents", 38, INK, "MEDIUM").next_to(sub, DOWN, buff=0.12, aligned_edge=LEFT)
+        rule = Line([LM, -1.85, 0], [LM + 5.2, -1.85, 0], stroke_color=EDGE, stroke_width=2)
+        by = T("Presented by", 20, SOFT, "MEDIUM").move_to([LM, -2.2, 0], aligned_edge=LEFT)
+        who = T("Nedas Jaronis", 36, BLUE, "BOLD").move_to([LM, -2.65, 0], aligned_edge=LEFT)
+        club = T("AI2 Club", 26, ORANGE, "SEMIBOLD").next_to(who, RIGHT, buff=0.35, aligned_edge=DOWN)
         self.add(logo)
+        self.play(GrowFromEdge(bar, LEFT), FadeIn(tag), run_time=0.5)
         self.play(FadeIn(t, shift=UP * 0.3), run_time=0.9)
         self.play(FadeIn(sub, shift=UP * 0.2), FadeIn(sub2, shift=UP * 0.2), run_time=0.6)
-        self.play(FadeIn(tag), run_time=0.5)
+        self.play(Create(rule), FadeIn(by), FadeIn(who), FadeIn(club), run_time=0.7)
         self.wait(0.5)
 
 
@@ -605,7 +616,7 @@ class S12(Deck):
 # ================================================================= 13 lock files
 class S13(Deck):
     n = 13
-    title = "Lock files"
+    title = "Lock files pin versions"
 
     def construct(self):
         self.prep()
@@ -715,9 +726,120 @@ class S15(Deck):
         self.play(FadeIn(warn, shift=UP * 0.2), run_time=0.6)
 
 
-# ================================================================= 16 review
+# ================================================================= 16 agents lock files
 class S16(Deck):
     n = 16
+    title = "Agents lock files too"
+
+    def construct(self):
+        self.prep()
+        names, ys = ["player.js", "animations.js", "level.js"], [0.95, -0.15, -1.25]
+
+        def status(kind, y):
+            if kind == "free":
+                m = T("free", 20, GOOD, "SEMIBOLD")
+            else:
+                col, who = (ORANGE, "Animation agent") if kind == "anim" else (BLUE, "Review agent")
+                m = VGroup(padlock(col), T(who, 19, col, "SEMIBOLD")).arrange(RIGHT, buff=0.12)
+            return m.move_to([2.7, y, 0], aligned_edge=RIGHT)
+
+        tiles, sts = [], []
+        for nm, y in zip(names, ys):
+            t = box(6.0, 0.85, EDGE, PAPER, 2.4, 0.05).move_to([0, y, 0])
+            lab = M(nm, 22, BLUE).move_to([-2.75, y, 0], aligned_edge=LEFT)
+            tiles.append(VGroup(t, lab))
+            sts.append(status("free", y))
+        anim = pill("Animation agent", ORANGE, WASH_O, 2.5, 0.95, 19).move_to([-5.35, -0.15, 0])
+        rev = pill("Review agent", BLUE, WASH_B, 2.5, 0.95, 19).move_to([5.35, -0.15, 0])
+        a_sub = T("builds the animations", 18, SOFT).next_to(anim, DOWN, buff=0.15)
+        r_sub = T("checks the work", 18, SOFT).next_to(rev, DOWN, buff=0.15)
+
+        def arrow(a, b, col):
+            return Arrow(a, b, buff=0, stroke_width=3.5, color=col, tip_length=0.18, max_tip_length_to_length_ratio=1)
+
+        self.add(self.intro("To avoid collisions, each agent claims the files it works on."))
+        self.play(LaggedStart(*[FadeIn(t) for t in tiles], lag_ratio=0.15), *[FadeIn(x) for x in sts], run_time=1.0)
+        self.play(FadeIn(anim), FadeIn(rev), FadeIn(a_sub), FadeIn(r_sub), run_time=0.7)
+
+        # 1: the animation agent claims two files
+        self.next_slide()
+        a1, a2 = arrow([-4.1, 0.05, 0], [-3.05, ys[0], 0], ORANGE), arrow([-4.1, -0.15, 0], [-3.05, ys[1], 0], ORANGE)
+        n0, n1 = status("anim", ys[0]), status("anim", ys[1])
+        self.play(Create(a1), Create(a2), tiles[0][0].animate.set_stroke(ORANGE), tiles[1][0].animate.set_stroke(ORANGE),
+                  FadeOut(sts[0]), FadeOut(sts[1]), FadeIn(n0), FadeIn(n1), run_time=0.9)
+        sts[0], sts[1] = n0, n1
+
+        # 2: the review agent claims level.js, then gets blocked on player.js
+        self.next_slide()
+        a3 = arrow([4.1, -0.35, 0], [3.05, ys[2], 0], BLUE)
+        n2 = status("rev", ys[2])
+        self.play(Create(a3), tiles[2][0].animate.set_stroke(BLUE), FadeOut(sts[2]), FadeIn(n2), run_time=0.8)
+        sts[2] = n2
+        blocked = DashedLine([4.1, 0.15, 0], [3.2, ys[0] - 0.05, 0], color=BAD, stroke_width=3.5, dash_length=0.12)
+        cross = Cross(Square(0.26), stroke_color=BAD, stroke_width=5).move_to([3.2, ys[0] - 0.05, 0])
+        note = para("Locked. Wait, or work on another file.", 20, BAD, 20, w="SEMIBOLD").move_to([5.35, 1.6, 0])
+        self.play(Create(blocked), FadeIn(cross), FadeIn(note), run_time=0.8)
+
+        # 3: the animation agent finishes and releases, then the review agent takes player.js
+        self.next_slide()
+        f0, f1 = status("free", ys[0]), status("free", ys[1])
+        self.play(FadeOut(a1), FadeOut(a2), FadeOut(blocked), FadeOut(cross), FadeOut(note),
+                  tiles[0][0].animate.set_stroke(EDGE), tiles[1][0].animate.set_stroke(EDGE),
+                  FadeOut(sts[0]), FadeOut(sts[1]), FadeIn(f0), FadeIn(f1), run_time=0.9)
+        a4 = arrow([4.1, 0.1, 0], [3.05, ys[0], 0], BLUE)
+        n0 = status("rev", ys[0])
+        self.play(Create(a4), tiles[0][0].animate.set_stroke(BLUE), FadeOut(f0), FadeIn(n0), run_time=0.9)
+        take = self.takeaway("One owner per file at a time, so agents never overwrite each other.", size=28)
+        self.play(FadeIn(take, shift=UP * 0.2), run_time=0.6)
+
+
+# ================================================================= 17 try it at your hackathon
+class S17(Deck):
+    n = 17
+    title = "Try it in your hackathon project"
+
+    def construct(self):
+        self.prep()
+        steps = [
+            "Give each agent its own area: a folder or a git worktree (a separate working copy).",
+            "Keep a claims file: LOCKS.md lists which agent owns which file.",
+            "Put the rule in CLAUDE.md so every agent follows it.",
+            "You read each diff and merge the branches yourself.",
+        ]
+        rows = []
+        for i, txt in enumerate(steps):
+            y = 1.7 - i * 1.08
+            dot = Circle(0.25, stroke_width=0, fill_color=ORANGE, fill_opacity=1).move_to([LM + 0.25, y, 0])
+            num = T(str(i + 1), 24, PAPER, "BOLD").move_to(dot)
+            body = para(txt, 23, INK, 42, w="MEDIUM").move_to([LM + 0.8, y, 0], aligned_edge=LEFT)
+            rows.append(VGroup(dot, num, body))
+
+        def panel(label, cy, h):
+            b = box(5.7, h, BLUE, WASH_B, 2.2, 0.05).move_to([3.55, cy, 0])
+            sh = Rectangle(width=5.7, height=h, stroke_width=0, fill_color=TINT, fill_opacity=1).move_to(b).shift(RIGHT * 0.1 + DOWN * 0.1)
+            lb = M(label, 20, SOFT).move_to(b.get_corner(UL) + np.array([0.3, -0.3, 0]), aligned_edge=UL)
+            return VGroup(sh, b, lb), b, lb
+
+        p1, b1, l1 = panel("LOCKS.md", 1.05, 2.0)
+        lines = ["animations.js   animation-agent", "player.js       animation-agent", "level.js        review-agent"]
+        ls = VGroup(*[M(t, 20, BLUE) for t in lines]).arrange(DOWN, aligned_edge=LEFT, buff=0.14)
+        ls.next_to(l1, DOWN, buff=0.22, aligned_edge=LEFT)
+        p2, b2, l2 = panel("CLAUDE.md", -1.35, 2.4)
+        rule = para("Before you edit a file, claim it in LOCKS.md. If another agent has it, work on something else. "
+                    "Delete your row when you are done.", 20, INK, 40).next_to(l2, DOWN, buff=0.2, aligned_edge=LEFT)
+
+        self.play(FadeIn(rows[0], shift=UP * 0.2), FadeIn(rows[1], shift=UP * 0.2), run_time=0.8)
+        self.next_slide()
+        self.play(FadeIn(p1), FadeIn(ls), run_time=0.8)
+        self.next_slide()
+        self.play(FadeIn(rows[2], shift=UP * 0.2), FadeIn(p2), FadeIn(rule), run_time=0.8)
+        self.next_slide()
+        self.play(FadeIn(rows[3], shift=UP * 0.2), run_time=0.6)
+
+
+# ================================================================= 18 review
+class S18(Deck):
+    n = 18
     title = "Review is the bottleneck"
 
     def construct(self):
@@ -733,9 +855,9 @@ class S16(Deck):
             self.play(FadeIn(c, shift=UP * 0.2), run_time=0.6)
 
 
-# ================================================================= 17 human at the end
-class S17(Deck):
-    n = 17
+# ================================================================= 19 human at the end
+class S19(Deck):
+    n = 19
     title = "The human at the end"
     credit = AIRBNB
 
@@ -754,9 +876,9 @@ class S17(Deck):
         self.play(FadeIn(b, shift=UP * 0.2), Indicate(L.m["pr"], color=ORANGE, scale_factor=1.15), run_time=0.8)
 
 
-# ================================================================= 18 questions
-class S18(Deck):
-    n = 18
+# ================================================================= 20 questions
+class S20(Deck):
+    n = 20
     hero = True
 
     def construct(self):
@@ -769,7 +891,12 @@ class S18(Deck):
         l1 = M("github.com/mattpocock/skills", 26, INK)
         l2 = M("github.com/humanlayer/advanced-context-engineering-for-coding-agents", 22, INK)
         l3 = T("Dex Horthy, HumanLayer", 22, SOFT)
-        links = VGroup(l1, l2, l3).arrange(DOWN, buff=0.3, aligned_edge=LEFT).move_to([LM, -0.9, 0], aligned_edge=LEFT)
+        links = VGroup(l1, l2, l3).arrange(DOWN, buff=0.3, aligned_edge=LEFT).move_to([LM, -0.6, 0], aligned_edge=LEFT)
+        rule = Line([LM, -1.85, 0], [LM + 5.2, -1.85, 0], stroke_color=EDGE, stroke_width=2)
+        thanks = T("Thank you", 20, SOFT, "MEDIUM").move_to([LM, -2.2, 0], aligned_edge=LEFT)
+        who = T("Nedas Jaronis", 36, BLUE, "BOLD").move_to([LM, -2.65, 0], aligned_edge=LEFT)
+        club = T("AI2 Club", 26, ORANGE, "SEMIBOLD").next_to(who, RIGHT, buff=0.35, aligned_edge=DOWN)
         self.add(logo)
         self.play(GrowFromEdge(bar, LEFT), FadeIn(q, shift=UP * 0.3), run_time=0.9)
         self.play(LaggedStart(*[FadeIn(l, shift=UP * 0.15) for l in links], lag_ratio=0.25), run_time=1.2)
+        self.play(Create(rule), FadeIn(thanks), FadeIn(who), FadeIn(club), run_time=0.7)
