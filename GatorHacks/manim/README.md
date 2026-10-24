@@ -1,6 +1,6 @@
 # Agents 101 (Manim Slides)
 
-Animated deck, one scene per slide in `deck.py` (S01 to S20). Speaker notes are embedded.
+Animated deck, one scene per slide in `deck.py` (S01 to S21). Speaker notes are embedded.
 
 ## Run it
     .\render.ps1 -Quality hd      # 1080p, takes a few minutes (use -Quality preview for fast drafts)
@@ -11,4 +11,4 @@ Re-render only what you changed: `.\render.ps1 -Slides S06,S14`.
 
 ## Notes
 - Manim is pinned below 0.20 because manim-slides 5.7 does not work with 0.22.
-- Colors and fonts live at the top of `deck.py` (Segoe UI, Consolas).
+- Colors and fonts live at the top of `deck.py` (Nunito, Consolas).

@@ -1,6 +1,6 @@
 """Agents 101, Gator Hack V edition. One Slide subclass per slide (S01 to S18).
 
-Look and feel follows ufgatorhack.com: paper white, UF blue and orange, Jost type,
+Look and feel follows ufgatorhack.com: paper white, UF blue and orange, Nunito type,
 square corners with thin blue borders, and a hard orange-tint "paper" shadow.
 Render with render.ps1, present with present.bat.
 """
@@ -14,8 +14,10 @@ from manim_slides import Slide
 
 HERE = Path(__file__).parent
 NOTES = json.load(open(HERE / "notes.json", encoding="utf-8"))
-_JOST = register_font(str(HERE / "fonts" / "Jost-Variable.ttf"))  # keep a reference or the font is unregistered
-_JOST.__enter__()
+FONT = "Nunito"          # rounded, from fonts/Nunito-Variable.ttf (Jost-Variable.ttf is still there to switch back)
+FONT_SCALE = 0.97        # Nunito runs wider than Jost, so sizes shrink a little to keep layouts fitting
+_FONT_FILE = register_font(str(HERE / "fonts" / "Nunito-Variable.ttf"))  # keep a reference or the font is unregistered
+_FONT_FILE.__enter__()
 
 # ---------------------------------------------------------------- design tokens
 PAPER = "#FFFFFF"
@@ -33,13 +35,13 @@ WARN_TXT = "#B45309"
 BAD = "#DC2626"
 GOOD_BG, WARN_BG, BAD_BG = "#E8F7EE", "#FFF6DB", "#FDECEC"
 MONO = "Consolas"
-TOTAL = 20
+TOTAL = 21
 LM = -6.4                 # left margin of all content
 AIRBNB = "Diagram adapted from a talk by Airbnb senior staff engineers"
 
 
-def T(s, size=26, color=INK, w="MEDIUM", font="Jost", **kw):
-    return Text(s, font=font, font_size=size, color=color, weight=w, **kw)
+def T(s, size=26, color=INK, w="MEDIUM", font=None, **kw):
+    return Text(s, font=font or FONT, font_size=size * FONT_SCALE, color=color, weight=w, **kw)
 
 
 def M(s, size=22, color=BLUE, **kw):
@@ -246,14 +248,16 @@ class S01(Deck):
         sub2 = T("AI coding agents", 38, INK, "MEDIUM").next_to(sub, DOWN, buff=0.12, aligned_edge=LEFT)
         rule = Line([LM, -1.85, 0], [LM + 5.2, -1.85, 0], stroke_color=EDGE, stroke_width=2)
         by = T("Presented by", 20, SOFT, "MEDIUM").move_to([LM, -2.2, 0], aligned_edge=LEFT)
-        who = T("Nedas Jaronis", 36, BLUE, "BOLD").move_to([LM, -2.65, 0], aligned_edge=LEFT)
-        club = T("AI2 Club", 26, ORANGE, "SEMIBOLD").next_to(who, RIGHT, buff=0.35, aligned_edge=DOWN)
+        who = T("Nedas Jaronis  ·  AI2 Club", 36, BLUE, "BOLD", t2c={"AI2 Club": ORANGE}).move_to([LM, -2.65, 0], aligned_edge=LEFT)
         self.add(logo)
         self.play(GrowFromEdge(bar, LEFT), FadeIn(tag), run_time=0.5)
         self.play(FadeIn(t, shift=UP * 0.3), run_time=0.9)
         self.play(FadeIn(sub, shift=UP * 0.2), FadeIn(sub2, shift=UP * 0.2), run_time=0.6)
-        self.play(Create(rule), FadeIn(by), FadeIn(who), FadeIn(club), run_time=0.7)
+        self.play(Create(rule), FadeIn(by), FadeIn(who), run_time=0.7)
         self.wait(0.5)
+
+
+# ================================================================= 02 raffle check-in
 
 
 # ================================================================= 02 two loops
@@ -888,15 +892,26 @@ class S20(Deck):
         q = T("Questions?", 100, BLUE, "BOLD").move_to([LM, 1.3, 0], aligned_edge=LEFT)
         bar = Rectangle(width=1.4, height=0.12, stroke_width=0, fill_color=ORANGE, fill_opacity=1)
         bar.move_to([LM, 2.55, 0], aligned_edge=LEFT)
-        l1 = M("github.com/mattpocock/skills", 26, INK)
-        l2 = M("github.com/humanlayer/advanced-context-engineering-for-coding-agents", 22, INK)
-        l3 = T("Dex Horthy, HumanLayer", 22, SOFT)
-        links = VGroup(l1, l2, l3).arrange(DOWN, buff=0.3, aligned_edge=LEFT).move_to([LM, -0.6, 0], aligned_edge=LEFT)
+        l1 = M("github.com/mattpocock/skills", 28, INK)
+        links = VGroup(l1).move_to([LM, -0.7, 0], aligned_edge=LEFT)
         rule = Line([LM, -1.85, 0], [LM + 5.2, -1.85, 0], stroke_color=EDGE, stroke_width=2)
         thanks = T("Thank you", 20, SOFT, "MEDIUM").move_to([LM, -2.2, 0], aligned_edge=LEFT)
-        who = T("Nedas Jaronis", 36, BLUE, "BOLD").move_to([LM, -2.65, 0], aligned_edge=LEFT)
-        club = T("AI2 Club", 26, ORANGE, "SEMIBOLD").next_to(who, RIGHT, buff=0.35, aligned_edge=DOWN)
+        who = T("Nedas Jaronis  ·  AI2 Club", 36, BLUE, "BOLD", t2c={"AI2 Club": ORANGE}).move_to([LM, -2.65, 0], aligned_edge=LEFT)
         self.add(logo)
         self.play(GrowFromEdge(bar, LEFT), FadeIn(q, shift=UP * 0.3), run_time=0.9)
         self.play(LaggedStart(*[FadeIn(l, shift=UP * 0.15) for l in links], lag_ratio=0.25), run_time=1.2)
-        self.play(Create(rule), FadeIn(thanks), FadeIn(who), FadeIn(club), run_time=0.7)
+        self.play(Create(rule), FadeIn(thanks), FadeIn(who), run_time=0.7)
+
+
+# ================================================================= 21 raffle check-in
+class S21(Deck):
+    n = 21
+    hero = True
+
+    def construct(self):
+        self.camera.background_color = ManimColor(PAPER)
+        self.next_slide(notes=NOTES["S21"])
+        img = ImageMobject(str(HERE / "assets" / "raffle.png")).scale_to_fit_width(config.frame_width)
+        img.move_to(ORIGIN)
+        self.add(img)
+        self.wait(0.5)

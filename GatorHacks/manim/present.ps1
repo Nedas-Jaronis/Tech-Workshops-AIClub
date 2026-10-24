@@ -2,7 +2,7 @@
 # Add -Web to export a self-contained HTML file instead (open it in any browser).
 param([switch]$Web)
 Set-Location $PSScriptRoot
-$slides = 1..20 | ForEach-Object { "S{0:D2}" -f $_ }
+$slides = 1..21 | ForEach-Object { "S{0:D2}" -f $_ }
 if ($Web) {
   & .\.venv\Scripts\manim-slides.exe convert --to html @slides agents101.html
   Write-Host "Wrote agents101.html"

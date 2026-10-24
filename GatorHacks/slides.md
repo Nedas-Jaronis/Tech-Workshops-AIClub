@@ -128,7 +128,7 @@ Quality starts to slip around **40% full** and falls off fast past 70%.
 </div>
 
 <!--
-Term from Dex Horthy of HumanLayer. Models advertise huge windows, but in practice answers get worse once the window is filled with a lot of material, often starting around 40%.
+Models advertise huge windows, but in practice answers get worse once the window is filled with a lot of material, often starting around 40%.
 
 Why: more noise to sort through, important instructions get buried, and old wrong turns keep influencing new answers.
 
@@ -535,14 +535,13 @@ class: text-center
 <div class="pt-6 text-left inline-block text-base">
 
 - github.com/mattpocock/skills
-- github.com/humanlayer/advanced-context-engineering-for-coding-agents (Dex Horthy, HumanLayer)
 
 </div>
 
 <!--
 Open the floor. Resources are listed on the slide.
 
-The HumanLayer repo is Dex Horthy's material on context engineering for coding agents.
+The skills repo is the one to start with.
 
 Closing thought: agents are good at the middle of the loop. You are responsible for the two ends.
 -->
