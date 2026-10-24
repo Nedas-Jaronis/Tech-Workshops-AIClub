@@ -1,0 +1,16 @@
+# Python packages for the Agents 101 deck (the Manim Slides version in manim/).
+# Install with:  python -m pip install -r requirements.txt
+# Or just run manim\setup.bat, which does this inside a virtual environment and renders the slides.
+#
+# Also needed on the machine (not installable with pip):
+#   Python 3.11 to 3.13   https://www.python.org/downloads/   (tick "Add python.exe to PATH")
+#   FFmpeg                winget install Gyan.FFmpeg          (then reopen the terminal)
+
+# Manim 0.19.x. manim-slides 5.7 does not work with Manim 0.20 or newer.
+manim>=0.19.2,<0.20
+
+# The slide player and presenter. The extra installs the Qt window it runs in.
+manim-slides[pyside6-full]==5.7.0
+
+# Manim 0.19 cannot draw images (the logo) with Pillow 11.3 or newer.
+pillow>=11.0,<11.3
