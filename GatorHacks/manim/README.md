@@ -14,6 +14,10 @@ Animated deck for Gator Hack V. One scene per slide in `deck.py` (S01 to S21). S
 
 While presenting: space or right arrow = next, left arrow = back, `q` = quit.
 
+Slides scale to fit any screen size (`present.py` patches the player, which otherwise assumes a 1920x1080 screen).
+On a projector over HDMI: in Windows "Duplicate" mode use `present.bat`; in "Extend" mode use **`present-hdmi.bat`**
+(slides on the projector, speaker notes on the laptop).
+
 ## Everyday commands
 
     .\render.ps1 -Quality hd        # 1080p (use this for the talk)
