@@ -1,0 +1,130 @@
+:root {
+  --bg: #000000;
+  --fg: #f5f5f7;
+  --muted: #86868b;
+  --hair: rgba(255, 255, 255, 0.12);
+  --glass: rgba(255, 255, 255, 0.05);
+  --green: #30d158;
+  --yellow: #ffd60a;
+  --red: #ff453a;
+  --blue: #0a84ff;
+}
+
+html, body, .slidev-layout, .slidev-page {
+  background: var(--bg) !important;
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* soft spotlight behind every slide */
+.slidev-layout {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(10, 132, 255, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 110%, rgba(48, 209, 88, 0.08), transparent 70%),
+    var(--bg) !important;
+  padding: 3.2rem 4.5rem;
+  letter-spacing: -0.011em;
+}
+
+/* typography */
+.slidev-layout h1 {
+  font-size: 2.9rem;
+  font-weight: 700;
+  line-height: 1.15;
+  padding-bottom: 0.12em;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(180deg, #ffffff 30%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.slidev-layout h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--muted);
+}
+.slidev-layout h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+.slidev-layout p, .slidev-layout li { font-size: 1.1rem; line-height: 1.5; }
+.slidev-layout ul { list-style: none; padding-left: 0; margin-left: 0; }
+.slidev-layout li { padding: 0.35rem 0; border-bottom: 1px solid var(--hair); }
+.slidev-layout li:last-child { border-bottom: 0; }
+.slidev-layout li::marker { content: ''; }
+.slidev-layout strong { color: var(--fg); font-weight: 600; }
+.slidev-layout a { color: var(--blue); border-bottom: 0; }
+
+/* title slide gets a hero treatment */
+.slidev-layout.cover h1, .slidev-layout.center h1 { font-size: 4.6rem; }
+
+/* glass cards */
+.card {
+  padding: 1.6rem 1.8rem;
+  border-radius: 18px;
+  background: var(--glass);
+  border: 1px solid var(--hair);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.card h3 { font-size: 1.5rem; }
+.card p { color: var(--muted); font-size: 1.2rem; margin: 0; }
+.card.good { border-top: 3px solid var(--green); }
+.card.warn { border-top: 3px solid var(--yellow); }
+.card.bad  { border-top: 3px solid var(--red); }
+.card.info { border-top: 3px solid var(--blue); }
+
+.accent-warn { color: var(--yellow); }
+.accent-bad { color: var(--red); }
+
+/* quote callout */
+.slidev-layout blockquote {
+  border: 0;
+  border-left: 3px solid var(--blue);
+  background: var(--glass);
+  border-radius: 0 16px 16px 0;
+  padding: 1rem 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* code */
+.slidev-layout pre, .slidev-code-wrapper, .slidev-code {
+  border-radius: 16px !important;
+  background: #0c0c0e !important;
+  border: 1px solid var(--hair);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.slidev-layout code:not(pre code) {
+  white-space: nowrap;
+  background: var(--glass);
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  padding: 0.1em 0.45em;
+  font-size: 0.9em;
+  color: var(--fg);
+}
+
+/* tables */
+.slidev-layout table { border-collapse: separate; border-spacing: 0; width: 100%; }
+.slidev-layout th {
+  text-align: left; color: var(--muted); font-weight: 500;
+  border-bottom: 1px solid var(--hair); padding: 0.6rem 0.8rem;
+}
+.slidev-layout td { border-bottom: 1px solid var(--hair); padding: 0.7rem 0.8rem; }
+
+/* diagrams float on the background */
+.mermaid { filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4)); }
+
+/* credit line */
+.credit { color: #6e6e73; font-size: 0.75rem; letter-spacing: 0.02em; position: absolute; left: 4.5rem; bottom: 1.4rem; margin: 0; text-align: left; }
+.credit-inline { color: #6e6e73; font-size: 0.9rem; letter-spacing: 0.02em; }
+.legend { color: var(--muted); font-size: 0.85rem; text-align: center; margin: 0.2rem 0 0.8rem; }
+
+img.shot { border-radius: 16px; border: 1px solid var(--hair); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }

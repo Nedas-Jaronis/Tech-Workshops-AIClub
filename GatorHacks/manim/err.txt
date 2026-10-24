@@ -1,0 +1,25 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:/Users/jaron/OneDrive/Documents/GitHub/Workshop-1/GatorHacks/manim/slides/files/S01/d2e8122c9c82c960.mp4':
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:/Users/jaron/OneDrive/Documents/GitHub/Workshop-1/GatorHacks/manim/slides/files/S02/22b804c9564c82fd.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.102
+  Duration: 00:00:01.50, start: 0.000000, bitrate: 355 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 348 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.102
+  Duration: 00:00:03.10, start: 0.000000, bitrate: 417 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 412 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+[av1_mf @ 000001FE3A5A96C0] could not find any MFT for the given media type
+[av1_mf @ 000001FE3A5A96C0] could not create MFT
+[h264_mf @ 000001FE3A5A8F80] MFT name: 'H264 Encoder MFT'
+[hevc_mf @ 000001FE3A5A8440] could not find any MFT for the given media type
+[hevc_mf @ 000001FE3A5A8440] could not create MFT
