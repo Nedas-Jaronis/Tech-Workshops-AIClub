@@ -129,10 +129,13 @@ class Deck(Slide):
             bar.move_to([LM, 2.78, 0], aligned_edge=LEFT)
             self.play(FadeIn(t, shift=UP * 0.15), GrowFromEdge(bar, LEFT), run_time=0.5)
 
-    def takeaway(self, text, color=BLUE, y=-2.95, size=30):
+    def takeaway(self, text, color=BLUE, y=-2.7, size=30):
         mark = Square(0.2, stroke_width=0, fill_color=ORANGE, fill_opacity=1).move_to([LM + 0.1, y, 0])
         t = T(text, size, color, "SEMIBOLD").move_to([LM + 0.5, y, 0], aligned_edge=LEFT)
         return VGroup(mark, t)
+
+    def intro(self, text):
+        return T(text, 26, INK).move_to([LM, 2.15, 0], aligned_edge=LEFT)
 
     def show(self, *mobs, shift=UP * 0.25, run_time=0.6, lag=0.0):
         self.play(LaggedStart(*[FadeIn(m, shift=shift) for m in mobs], lag_ratio=lag), run_time=run_time)
@@ -258,8 +261,8 @@ class S02(Deck):
         self.next_slide()
         self.play(FadeIn(L.group("out"), lag_ratio=0.1), run_time=1.2)
         legend = T("LLM = the AI model     Config = standing instructions     PR = a proposed code change", 20, SOFT)
-        legend.move_to([0, -2.28, 0])
-        take = self.takeaway("You control what goes in and what comes out. The agent runs the middle.", y=-2.85, size=28)
+        legend.move_to([0, -2.1, 0])
+        take = self.takeaway("You control what goes in and what comes out. The agent runs the middle.", y=-2.65, size=28)
         self.next_slide()
         self.play(FadeIn(legend), FadeIn(take, shift=UP * 0.2), run_time=0.7)
 
@@ -297,6 +300,7 @@ class S03(Deck):
         n2 = T("The agent does the middle.", 24, SOFT).move_to([X0, -1.85, 0], aligned_edge=LEFT)
         take = self.takeaway("Your time moves to planning and reviewing.")
 
+        self.add(self.intro("The software development lifecycle: the steps every feature goes through."))
         self.play(FadeIn(tag1), LaggedStart(*[FadeIn(m, shift=UP * 0.2) for m in r1], lag_ratio=0.15), run_time=1.0)
         self.play(Create(a1), FadeIn(n1), run_time=0.7)
         self.next_slide()
@@ -318,7 +322,8 @@ class S04(Deck):
         cs = [card("Instructions", "System prompt, rules file (CLAUDE.md), skills", BLUE, w, h),
               card("What it read", "Files and tool output", BLUE, w, h),
               card("The conversation", "Everything you and the agent said", BLUE, w, h)]
-        VGroup(*cs).arrange(RIGHT, buff=0.25).move_to([0, 0.15, 0])
+        VGroup(*cs).arrange(RIGHT, buff=0.25).move_to([0, -0.1, 0])
+        self.add(self.intro("The context window is everything the agent can see at one time."))
         self.show(*cs, run_time=1.2, lag=0.25)
         q = self.takeaway("The agent only knows what is in its context.")
         self.next_slide()
@@ -358,6 +363,7 @@ class S05(Deck):
         ticks[3].shift(LEFT * 0.3)
         take = self.takeaway("Quality starts to slip around 40% full and falls off fast past 70%.", size=28)
 
+        self.add(self.intro("The fuller the window gets, the worse the agent performs."))
         self.play(FadeIn(track), FadeIn(ticks), run_time=0.6)
         self.next_slide()
         self.play(LaggedStart(*[FadeIn(s) for s in segs], lag_ratio=0.05), run_time=5.5, rate_func=linear)
@@ -388,7 +394,7 @@ class S06(Deck):
             (5, "/clear", "/clear starts fresh from a file",
              "You write a plan or handoff file, clear the window, and the next session reads only that file.", True),
         ]
-        xl, xr, y0, y1 = -4.8, 5.6, -0.85, 1.85
+        xl, xr, y0, y1 = -4.8, 5.6, -0.7, 1.7
         Y = lambda p: y0 + (y1 - y0) * p / 100
         X = lambda i: xl + (xr - xl) * i / (len(pts) - 1)
         zc = lambda p: GOOD if p < 40 else (WARN if p < 70 else BAD)
@@ -409,7 +415,7 @@ class S06(Deck):
 
         def caption(i):
             _, _, ct, cb, _ = pts[i]
-            b = box(R - L, 1.35, BLUE, PAPER, 2.2, 0.05).move_to([(L + R) / 2, -2.6, 0])
+            b = box(R - L, 1.35, BLUE, PAPER, 2.2, 0.05).move_to([(L + R) / 2, -2.3, 0])
             a = T(ct, 30, BLUE, "BOLD").move_to(b.get_corner(UL) + np.array([0.35, -0.25, 0]), aligned_edge=UL)
             c = T(cb, 21, INK).next_to(a, DOWN, buff=0.14, aligned_edge=LEFT)
             return VGroup(b, a, c)
@@ -465,8 +471,8 @@ class S08(Deck):
                  ("description: Interview me about a plan until every branch is resolved.", INK),
                  ("---", SOFT), ("# Grill me", ORANGE), ("1. Ask one question at a time.", INK),
                  ("2. Offer your recommended answer.", INK), ("3. Stop when no open branches remain.", INK)]
-        ts = VGroup(*[M(s, 20, c) for s, c in lines]).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
-        panel = box(ts.width + 1.0, ts.height + 0.8, BLUE, WASH_B, 2.2, 0.05).move_to([0, 0.35, 0])
+        ts = VGroup(*[M(s, 20, c) for s, c in lines]).arrange(DOWN, aligned_edge=LEFT, buff=0.14)
+        panel = box(ts.width + 1.0, ts.height + 0.7, BLUE, WASH_B, 2.2, 0.05).move_to([0, -0.2, 0])
         ts.move_to(panel)
         shadow = Rectangle(width=panel.width, height=panel.height, stroke_width=0, fill_color=TINT,
                            fill_opacity=1).move_to(panel).shift(RIGHT * 0.1 + DOWN * 0.1)
@@ -475,6 +481,7 @@ class S08(Deck):
                        fill_opacity=0.15).move_to(ts[2])
         take = self.takeaway("Only the short description sits in context. The body loads when needed.", size=27)
 
+        self.add(self.intro("A skill is a short how-to file the agent loads for one kind of task."))
         self.play(FadeIn(shadow), FadeIn(panel), FadeIn(file_lbl), run_time=0.5)
         self.play(LaggedStart(*[FadeIn(t, shift=RIGHT * 0.15) for t in ts], lag_ratio=0.12), run_time=1.6)
         self.next_slide()
@@ -491,24 +498,37 @@ class S09(Deck):
 
     def construct(self):
         self.prep()
-        cmd_t = M("claude plugin install mattpocock-skills@claude-plugins-official", 25, PAPER)
-        cmd = box(cmd_t.width + 0.9, 0.85, BLUE, BLUE, 2.2, 0.05).move_to([0, 1.65, 0])
+        cmd_t = M("claude plugin install mattpocock-skills@claude-plugins-official", 23, PAPER)
+        cmd = box(cmd_t.width + 0.9, 0.7, BLUE, BLUE, 2.2, 0.05).move_to([0, 2.05, 0])
         cmd_t.move_to(cmd)
-        rows = [("grill-me   to-spec   to-tickets", "Spec, into the Prompt arrow"),
-                ("tdd   diagnosing-bugs", "The Guardrails box"),
-                ("code-review", "The Review step")]
-        out = []
-        for i, (skills, where) in enumerate(rows):
-            b = box(12.4, 0.95, BLUE, PAPER, 2.0, 0.05).move_to([0, 0.35 - i * 1.2, 0])
-            s = M(skills, 22, BLUE).move_to([-6.0, b.get_center()[1], 0], aligned_edge=LEFT)
-            ar = Arrow([-0.45, b.get_center()[1], 0], [0.25, b.get_center()[1], 0], buff=0, stroke_width=4,
-                       color=ORANGE, tip_length=0.2, max_tip_length_to_length_ratio=1)
-            w = T(where, 28, ORANGE, "BOLD").move_to([0.6, b.get_center()[1], 0], aligned_edge=LEFT)
-            out.append(VGroup(b, s, ar, w))
+        groups = [
+            ("Before coding", "Feeds the Prompt arrow",
+             [("grill-me", "Quizzes you on your idea"),
+              ("to-spec", "Turns the chat into a spec"),
+              ("to-tickets", "Splits the spec into tasks")]),
+            ("While coding", "Strengthens Guardrails",
+             [("tdd", "Test-driven development: write the test first"),
+              ("diagnosing-bugs", "A step-by-step way to find hard bugs")]),
+            ("After coding", "Powers the Review step",
+             [("code-review", "Checks changes against your spec")]),
+        ]
+        shells = [card(head, "", ORANGE, 4.15, 4.1, 30) for head, _, _ in groups]
+        VGroup(*shells).arrange(RIGHT, buff=0.25).move_to([0, -0.5, 0])
+        cards = []
+        for shell, (head, sub, entries) in zip(shells, groups):
+            subt = T(sub, 20, ORANGE, "SEMIBOLD").next_to(shell[3], DOWN, buff=0.08, aligned_edge=LEFT)
+            rows = []
+            for name, meaning in entries:
+                nm = M(name, 22, BLUE)
+                ds = para(meaning, 20, INK, 28).next_to(nm, DOWN, buff=0.04, aligned_edge=LEFT)
+                rows.append(VGroup(nm, ds))
+            col = VGroup(*rows).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+            col.next_to(subt, DOWN, buff=0.22, aligned_edge=LEFT)
+            cards.append(VGroup(shell, subt, col))
         self.play(FadeIn(cmd, shift=DOWN * 0.15), FadeIn(cmd_t, shift=DOWN * 0.15), run_time=0.7)
-        for r in out:
+        for c in cards:
             self.next_slide()
-            self.play(FadeIn(r, shift=UP * 0.2), run_time=0.6)
+            self.play(FadeIn(c, shift=UP * 0.2), run_time=0.7)
 
 
 # ================================================================= 10 demo
@@ -534,11 +554,11 @@ class S11(Deck):
 
     def construct(self):
         self.prep()
-        H = 4.1
+        H = 4.0
 
         def panel(title, accent, items, w, x):
             c = card(title, "", accent, w, H, 30)
-            c.move_to([x, -0.1, 0])
+            c.move_to([x, 0.0, 0])
             rows = []
             for a, b in items:
                 head = T(a, 28, BLUE, "SEMIBOLD")
@@ -557,7 +577,7 @@ class S11(Deck):
         self.play(FadeIn(left, shift=UP * 0.2), run_time=0.8)
         self.next_slide()
         self.play(FadeIn(right, shift=UP * 0.2), run_time=0.8)
-        arr = Arrow([2.95 - 2.4, -2.5, 0], [2.95 + 2.4, -2.5, 0], buff=0, stroke_width=4, color=GOOD, tip_length=0.2,
+        arr = Arrow([2.95 - 2.4, -2.35, 0], [2.95 + 2.4, -2.35, 0], buff=0, stroke_width=4, color=GOOD, tip_length=0.2,
                     max_tip_length_to_length_ratio=1)
         lab = T("safer", 22, GOOD, "BOLD").next_to(arr, DOWN, buff=0.08)
         self.play(Create(arr), FadeIn(lab), run_time=0.6)
@@ -570,12 +590,12 @@ class S12(Deck):
 
     def construct(self):
         self.prep()
-        w, h = 6.1, 2.25
-        cs = [card("Permission prompts", "The agent asks before risky actions.", WARN, w, h, 30, 23, 34),
-              card("Allow and deny lists", "Pre-approve safe commands, block the rest.", WARN, w, h, 30, 23, 34),
-              card("Hooks", "Scripts that block commands like rm -rf or a force push.", GOOD, w, h, 30, 23, 34),
-              card("Tests and linters", "Automatic gates. A linter is a code checker.", GOOD, w, h, 30, 23, 34)]
-        VGroup(*cs).arrange_in_grid(rows=2, cols=2, buff=0.4).move_to([0, -0.25, 0])
+        w, h = 6.1, 2.35
+        cs = [card("Permission prompts", "The agent asks you before it does anything risky.", WARN, w, h, 30, 21, 44),
+              card("Allow and deny lists", "Pre-approve safe commands, like running tests. Block the rest.", WARN, w, h, 30, 21, 44),
+              card("Hooks", "Scripts that block rm -rf (delete all) and force push (rewrite history).", GOOD, w, h, 30, 21, 44),
+              card("Tests and linters", "Automatic checks that must pass. A linter spots mistakes and messy code.", GOOD, w, h, 30, 21, 44)]
+        VGroup(*cs).arrange_in_grid(rows=2, cols=2, buff=0.3).move_to([0, -0.2, 0])
         self.play(FadeIn(cs[0], shift=UP * 0.2), run_time=0.6)
         for c in cs[1:]:
             self.next_slide()
@@ -592,16 +612,17 @@ class S13(Deck):
         rows = [('  "dependencies": {', INK), ('    "express": "4.19.2",', INK),
                 ('+   "leftpad-utils": "0.0.1"', GOOD), ("  }", INK)]
         ts = VGroup(*[M(s, 27, c) for s, c in rows]).arrange(DOWN, aligned_edge=LEFT, buff=0.26)
-        panel = box(ts.width + 1.4, ts.height + 0.9, BLUE, PAPER, 2.2, 0.05).move_to([0, 0.55, 0])
+        panel = box(ts.width + 1.4, ts.height + 0.9, BLUE, PAPER, 2.2, 0.05).move_to([0, 0.15, 0])
         shadow = Rectangle(width=panel.width, height=panel.height, stroke_width=0, fill_color=TINT,
                            fill_opacity=1).move_to(panel).shift(RIGHT * 0.1 + DOWN * 0.1)
         ts.move_to(panel)
         band = Rectangle(width=panel.width - 0.1, height=0.55, stroke_width=0, fill_color=GOOD_BG,
                          fill_opacity=1).move_to([panel.get_center()[0], ts[2].get_center()[1], 0])
         t1 = T("Pinned versions mean agents cannot silently add or upgrade packages.", 28, BLUE, "SEMIBOLD")
-        t1.move_to([LM, -1.85, 0], aligned_edge=LEFT)
-        t2 = T("Read every new line in the diff. Never heard of it? Stop and check.", 26, INK)
-        t2.move_to([LM, -2.5, 0], aligned_edge=LEFT)
+        t1.move_to([LM, -1.75, 0], aligned_edge=LEFT)
+        t2 = T("Read every new line in the diff (the list of changes). Never heard of it? Stop and check.", 24, INK)
+        t2.move_to([LM, -2.35, 0], aligned_edge=LEFT)
+        self.add(self.intro("A lock file lists the exact version of every package your project uses."))
         self.play(FadeIn(shadow), FadeIn(panel), run_time=0.4)
         self.play(LaggedStart(*[FadeIn(t, shift=RIGHT * 0.15) for t in ts], lag_ratio=0.2), run_time=1.4)
         self.next_slide()
@@ -680,11 +701,11 @@ class S15(Deck):
 
     def construct(self):
         self.prep()
-        w, h = 4.15, 2.9
-        cs = [card("Fan-out", "Many agents research in parallel.", BLUE, w, h),
-              card("Pipeline", "Planner, then implementer, then reviewer.", BLUE, w, h),
-              card("Until it passes", "Loop until tests go green.", BLUE, w, h)]
-        VGroup(*cs).arrange(RIGHT, buff=0.25).move_to([0, 0.3, 0])
+        w, h = 4.15, 3.3
+        cs = [card("Fan-out", "Ask several agents to research different questions at once.", BLUE, w, h, 32, 22, 25),
+              card("Pipeline", "One agent plans, another writes the code, a third reviews it.", BLUE, w, h, 32, 22, 25),
+              card("Until it passes", "The agent runs the tests, fixes what fails, and repeats until they pass.", BLUE, w, h, 32, 22, 25)]
+        VGroup(*cs).arrange(RIGHT, buff=0.25).move_to([0, 0.15, 0])
         self.play(FadeIn(cs[0], shift=UP * 0.2), run_time=0.6)
         for c in cs[1:]:
             self.next_slide()
@@ -701,10 +722,10 @@ class S16(Deck):
 
     def construct(self):
         self.prep()
-        w, h = 4.15, 2.9
-        cs = [card("Read the diff", "Every changed line, not just the summary.", GOOD, w, h),
-              card("Run it", "Do not trust tests pass alone.", GOOD, w, h),
-              card("Keep PRs small", "Big agent PRs get rubber stamped.", GOOD, w, h)]
+        w, h = 4.15, 3.3
+        cs = [card("Read the diff", "Check every changed line, not just the summary. A diff is the list of changes.", GOOD, w, h, 32, 22, 25),
+              card("Run it", "Try the feature yourself. Passing tests only cover what someone thought to test.", GOOD, w, h, 32, 22, 25),
+              card("Keep PRs small", "A PR (pull request) is a proposed change. Big ones get skimmed, so keep them small.", GOOD, w, h, 32, 22, 25)]
         VGroup(*cs).arrange(RIGHT, buff=0.25).move_to([0, 0.0, 0])
         self.play(FadeIn(cs[0], shift=UP * 0.2), run_time=0.6)
         for c in cs[1:]:
@@ -726,8 +747,8 @@ class S17(Deck):
         self.next_slide()
         self.play(*L.focus({"review", "pr", "e_pr", "e_cc", "l_cc", "prompt", "e_out", "l_out", "dev_region"}),
                   run_time=0.8)
-        a = self.takeaway("The agent opens the PR. A human merges it.", y=-2.35, size=28)
-        b = self.takeaway("If you cannot explain a line, it does not ship.", BAD, y=-2.9, size=28)
+        a = self.takeaway("The agent opens the PR. A human merges it.", y=-2.25, size=28)
+        b = self.takeaway("If you cannot explain a line, it does not ship.", BAD, y=-2.75, size=28)
         self.play(FadeIn(a, shift=UP * 0.2), run_time=0.6)
         self.next_slide()
         self.play(FadeIn(b, shift=UP * 0.2), Indicate(L.m["pr"], color=ORANGE, scale_factor=1.15), run_time=0.8)
